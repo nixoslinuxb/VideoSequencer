@@ -532,7 +532,7 @@ class VideoEditingActivity : AppCompatActivity() {
         pixelsPerMs = 0.15f * resources.displayMetrics.density
 
         // Apply system UI visibility based on user setting
-        val prefs = getSharedPreferences("librecuts_prefs", MODE_PRIVATE)
+        val prefs = getSharedPreferences("videosequencer_prefs", MODE_PRIVATE)
         val isFullscreen = prefs.getBoolean("fullscreen_editor", true)
         if (isFullscreen) {
             window.decorView.systemUiVisibility = (
@@ -2459,7 +2459,7 @@ class VideoEditingActivity : AppCompatActivity() {
         var fos: java.io.OutputStream? = null
         var imageUri: Uri? = null
         try {
-            val sharedPreferences = getSharedPreferences("librecuts_prefs", Context.MODE_PRIVATE)
+            val sharedPreferences = getSharedPreferences("videosequencer_prefs", Context.MODE_PRIVATE)
             val customUriString = sharedPreferences.getString("export_snapshot_directory_uri", null)
             
             if (customUriString != null) {
@@ -4612,7 +4612,7 @@ class VideoEditingActivity : AppCompatActivity() {
                     val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                     contentResolver.takePersistableUriPermission(treeUri, takeFlags)
 
-                    val sharedPreferences = getSharedPreferences("librecuts_prefs", Context.MODE_PRIVATE)
+                    val sharedPreferences = getSharedPreferences("videosequencer_prefs", Context.MODE_PRIVATE)
                     val isAudioOnly = viewModel.exportAudioOnly.value
                     val prefKey = if (isAudioOnly) "export_audio_directory_uri" else "export_directory_uri"
                     sharedPreferences.edit().putString(prefKey, treeUri.toString()).apply()
@@ -4922,7 +4922,7 @@ class VideoEditingActivity : AppCompatActivity() {
                 viewModel.startExport()
                 
                 withContext(kotlinx.coroutines.Dispatchers.IO) {
-                    val sharedPreferences = getSharedPreferences("librecuts_prefs", Context.MODE_PRIVATE)
+                    val sharedPreferences = getSharedPreferences("videosequencer_prefs", Context.MODE_PRIVATE)
                     val isAudioOnly = viewModel.exportAudioOnly.value
                     val prefKey = if (isAudioOnly) "export_audio_directory_uri" else "export_directory_uri"
                     val customUriString = sharedPreferences.getString(prefKey, null)
@@ -5049,7 +5049,7 @@ class VideoEditingActivity : AppCompatActivity() {
     }
 
     private fun updateExportDirectoryUi(titleView: TextView, pathView: TextView) {
-        val sharedPreferences = getSharedPreferences("librecuts_prefs", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("videosequencer_prefs", Context.MODE_PRIVATE)
         val isAudioOnly = viewModel.exportAudioOnly.value
         val prefKey = if (isAudioOnly) "export_audio_directory_uri" else "export_directory_uri"
         val customUriString = sharedPreferences.getString(prefKey, null)
@@ -7404,7 +7404,7 @@ class VideoEditingActivity : AppCompatActivity() {
         val ext = if (isAudioOnly) ".mp3" else ".mp4"
         val prefix = if (isAudioOnly) "VideoEditing_Audio_" else "VideoEditing_"
         
-        val sharedPreferences = getSharedPreferences("librecuts_prefs", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("videosequencer_prefs", Context.MODE_PRIVATE)
         val prefKey = if (isAudioOnly) "export_audio_directory_uri" else "export_directory_uri"
         val customUriString = sharedPreferences.getString(prefKey, null)
         if (customUriString != null) {

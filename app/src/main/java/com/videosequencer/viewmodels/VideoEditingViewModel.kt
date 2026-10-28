@@ -1305,7 +1305,7 @@ class VideoEditingViewModel : ViewModel() {
                     480 -> "2M"
                     else -> "1M"
                 }
-                val defaultEncoder = context?.getSharedPreferences("librecuts_prefs", Context.MODE_PRIVATE)
+                val defaultEncoder = context?.getSharedPreferences("videosequencer_prefs", Context.MODE_PRIVATE)
                     ?.getString("default_encoder", "hardware") ?: "hardware"
                 val videoCodec = if (defaultEncoder == "software") "-c:v libx264 -pix_fmt yuv420p" else "-c:v h264_mediacodec -pix_fmt yuv420p -b:v $bitrate"
                 cmd.append(" $videoCodec")
@@ -1559,7 +1559,7 @@ class VideoEditingViewModel : ViewModel() {
                 480 -> "2M"
                 else -> "1M"
             }
-            val defaultEncoder = context?.getSharedPreferences("librecuts_prefs", Context.MODE_PRIVATE)
+            val defaultEncoder = context?.getSharedPreferences("videosequencer_prefs", Context.MODE_PRIVATE)
                 ?.getString("default_encoder", "hardware") ?: "hardware"
             val videoCodec = if (defaultEncoder == "software") "-c:v libx264 -pix_fmt yuv420p" else "-c:v h264_mediacodec -pix_fmt yuv420p -b:v $bitrate"
             // If there are no video filters, we still need to apply the scale and fps output params

@@ -9,7 +9,7 @@ import android.view.View
  * Checks whether haptic feedback is enabled in user settings.
  */
 fun View.isHapticFeedbackEnabled(): Boolean {
-    val prefs = context.getSharedPreferences("librecuts_prefs", Context.MODE_PRIVATE)
+    val prefs = context.getSharedPreferences("videosequencer_prefs", Context.MODE_PRIVATE)
     return prefs.getBoolean("haptic_feedback", true)
 }
 

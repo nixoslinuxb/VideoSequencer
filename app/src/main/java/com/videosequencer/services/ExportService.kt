@@ -211,7 +211,7 @@ class ExportService : Service() {
         val ext = if (isAudioOnly) ".mp3" else ".mp4"
         val prefix = if (isAudioOnly) "VideoEditing_Audio_" else "VideoEditing_"
         
-        val sharedPreferences = getSharedPreferences("librecuts_prefs", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("videosequencer_prefs", Context.MODE_PRIVATE)
         val prefKey = if (isAudioOnly) "export_audio_directory_uri" else "export_directory_uri"
         val customUriString = sharedPreferences.getString(prefKey, null)
         

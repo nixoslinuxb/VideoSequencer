@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                             Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                     contentResolver.takePersistableUriPermission(uri, takeFlags)
 
-                    val prefs = getSharedPreferences("librecuts_prefs", MODE_PRIVATE)
+                    val prefs = getSharedPreferences("videosequencer_prefs", MODE_PRIVATE)
                     prefs.edit().putString("export_directory_uri", uri.toString()).apply()
                     updateExportFolderUI(uri, binding.tvCurrentExportFolder, R.string.str_default_movies_librecuts)
                 } catch (e: Exception) {
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                             Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                     contentResolver.takePersistableUriPermission(uri, takeFlags)
 
-                    val prefs = getSharedPreferences("librecuts_prefs", MODE_PRIVATE)
+                    val prefs = getSharedPreferences("videosequencer_prefs", MODE_PRIVATE)
                     prefs.edit().putString("export_audio_directory_uri", uri.toString()).apply()
                     updateExportFolderUI(uri, binding.tvCurrentAudioExportFolder, R.string.str_default_music_librecuts)
                 } catch (e: Exception) {
@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                             Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                     contentResolver.takePersistableUriPermission(uri, takeFlags)
 
-                    val prefs = getSharedPreferences("librecuts_prefs", MODE_PRIVATE)
+                    val prefs = getSharedPreferences("videosequencer_prefs", MODE_PRIVATE)
                     prefs.edit().putString("export_snapshot_directory_uri", uri.toString()).apply()
                     updateExportFolderUI(
                         uri,
@@ -248,7 +248,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Initialize Settings UI
-        val prefs = getSharedPreferences("librecuts_prefs", MODE_PRIVATE)
+        val prefs = getSharedPreferences("videosequencer_prefs", MODE_PRIVATE)
         val savedUriString = prefs.getString("export_directory_uri", null)
         if (savedUriString != null) {
             updateExportFolderUI(
@@ -398,7 +398,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateHapticFeedbackUI() {
-        val prefs = getSharedPreferences("librecuts_prefs", MODE_PRIVATE)
+        val prefs = getSharedPreferences("videosequencer_prefs", MODE_PRIVATE)
         val isEnabled = prefs.getBoolean("haptic_feedback", true)
         binding.tvCurrentHapticFeedback.text = if (isEnabled) {
             getString(R.string.str_haptic_enabled_desc)
@@ -408,7 +408,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateFullscreenEditorUI() {
-        val prefs = getSharedPreferences("librecuts_prefs", MODE_PRIVATE)
+        val prefs = getSharedPreferences("videosequencer_prefs", MODE_PRIVATE)
         val isFullscreen = prefs.getBoolean("fullscreen_editor", true)
         binding.tvCurrentFullscreenEditor.text = if (isFullscreen) {
             getString(R.string.str_fullscreen_enabled_desc)
@@ -418,7 +418,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateEncoderUI() {
-        val prefs = getSharedPreferences("librecuts_prefs", MODE_PRIVATE)
+        val prefs = getSharedPreferences("videosequencer_prefs", MODE_PRIVATE)
         val defaultEncoder = prefs.getString("default_encoder", "hardware") ?: "hardware"
         if (defaultEncoder == "software") {
             binding.tvCurrentDefaultEncoder.text = getString(R.string.str_encoder_software)
@@ -428,7 +428,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showEncoderDialog() {
-        val prefs = getSharedPreferences("librecuts_prefs", MODE_PRIVATE)
+        val prefs = getSharedPreferences("videosequencer_prefs", MODE_PRIVATE)
         val currentEncoder = prefs.getString("default_encoder", "hardware") ?: "hardware"
         val options = arrayOf(
             getString(R.string.str_encoder_hardware),
