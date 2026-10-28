@@ -298,7 +298,7 @@ class ScreenRecordService : Service() {
             }
 
             virtualDisplay = mediaProjection?.createVirtualDisplay(
-                "LibreCutsScreenRecord",
+                "VideoEditingScreenRecord",
                 preparedWidth,
                 preparedHeight,
                 density,

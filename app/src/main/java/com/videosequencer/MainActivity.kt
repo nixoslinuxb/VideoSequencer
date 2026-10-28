@@ -117,7 +117,11 @@ class MainActivity : AppCompatActivity() {
 
                     val prefs = getSharedPreferences("librecuts_prefs", MODE_PRIVATE)
                     prefs.edit().putString("export_snapshot_directory_uri", uri.toString()).apply()
-                    updateExportFolderUI(uri, binding.tvCurrentSnapshotExportFolder, R.string.str_default_pictures_librecuts)
+                    updateExportFolderUI(
+                        uri,
+                        binding.tvCurrentSnapshotExportFolder,
+                        R.string.str_default_pictures_librecuts
+                    )
                 } catch (e: Exception) {
                     Log.e("FolderSelectionError", "Error securing permission for URI", e)
                     showToast(getString(R.string.toast_failed_to_set_export_folder))
@@ -152,10 +156,14 @@ class MainActivity : AppCompatActivity() {
                 com.videosequencer.services.ScreenRecordService.ACTION_RECORDING_STARTED -> {
                     updateScreenRecordUI(isRecording = true)
                 }
+
                 com.videosequencer.services.ScreenRecordService.ACTION_RECORDING_FINISHED -> {
                     updateScreenRecordUI(isRecording = false)
                     val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        intent.getParcelableExtra(com.videosequencer.services.ScreenRecordService.EXTRA_RECORDED_URI, Uri::class.java)
+                        intent.getParcelableExtra(
+                            com.videosequencer.services.ScreenRecordService.EXTRA_RECORDED_URI,
+                            Uri::class.java
+                        )
                     } else {
                         @Suppress("DEPRECATION")
                         intent.getParcelableExtra(com.videosequencer.services.ScreenRecordService.EXTRA_RECORDED_URI)
@@ -166,6 +174,7 @@ class MainActivity : AppCompatActivity() {
                         showToast("Screen recording saved!")
                     }
                 }
+
                 com.videosequencer.services.ScreenRecordService.ACTION_RECORDING_ERROR -> {
                     updateScreenRecordUI(isRecording = false)
                     showToast("Screen recording error.")
@@ -222,11 +231,11 @@ class MainActivity : AppCompatActivity() {
         binding.tabHome.setBounceClickListener {
             switchTab(0)
         }
-        
+
         binding.tabSettings.setBounceClickListener {
             switchTab(1)
         }
-        
+
         // Setup Settings Actions
         binding.btnChangeExportFolder.setBounceClickListener {
             selectFolderLauncher.launch(null)
@@ -237,26 +246,38 @@ class MainActivity : AppCompatActivity() {
         binding.btnChangeSnapshotExportFolder.setBounceClickListener {
             selectSnapshotFolderLauncher.launch(null)
         }
-        
+
         // Initialize Settings UI
         val prefs = getSharedPreferences("librecuts_prefs", MODE_PRIVATE)
         val savedUriString = prefs.getString("export_directory_uri", null)
         if (savedUriString != null) {
-            updateExportFolderUI(Uri.parse(savedUriString), binding.tvCurrentExportFolder, R.string.str_default_movies_librecuts)
+            updateExportFolderUI(
+                Uri.parse(savedUriString),
+                binding.tvCurrentExportFolder,
+                R.string.str_default_movies_librecuts
+            )
         } else {
             updateExportFolderUI(null, binding.tvCurrentExportFolder, R.string.str_default_movies_librecuts)
         }
 
         val savedAudioUriString = prefs.getString("export_audio_directory_uri", null)
         if (savedAudioUriString != null) {
-            updateExportFolderUI(Uri.parse(savedAudioUriString), binding.tvCurrentAudioExportFolder, R.string.str_default_music_librecuts)
+            updateExportFolderUI(
+                Uri.parse(savedAudioUriString),
+                binding.tvCurrentAudioExportFolder,
+                R.string.str_default_music_librecuts
+            )
         } else {
             updateExportFolderUI(null, binding.tvCurrentAudioExportFolder, R.string.str_default_music_librecuts)
         }
 
         val savedSnapshotUriString = prefs.getString("export_snapshot_directory_uri", null)
         if (savedSnapshotUriString != null) {
-            updateExportFolderUI(Uri.parse(savedSnapshotUriString), binding.tvCurrentSnapshotExportFolder, R.string.str_default_pictures_librecuts)
+            updateExportFolderUI(
+                Uri.parse(savedSnapshotUriString),
+                binding.tvCurrentSnapshotExportFolder,
+                R.string.str_default_pictures_librecuts
+            )
         } else {
             updateExportFolderUI(null, binding.tvCurrentSnapshotExportFolder, R.string.str_default_pictures_librecuts)
         }
@@ -317,11 +338,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkPermissionsAndStartScreenRecord() {
         val permissionsNeeded = mutableListOf<String>()
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.RECORD_AUDIO
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             permissionsNeeded.add(Manifest.permission.RECORD_AUDIO)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             permissionsNeeded.add(Manifest.permission.POST_NOTIFICATIONS)
         }
 
@@ -333,7 +362,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun launchScreenCaptureIntent() {
-        val projectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE) as android.media.projection.MediaProjectionManager
+        val projectionManager =
+            getSystemService(Context.MEDIA_PROJECTION_SERVICE) as android.media.projection.MediaProjectionManager
         val captureIntent = projectionManager.createScreenCaptureIntent()
         screenRecordLauncher.launch(captureIntent)
     }
@@ -444,6 +474,7 @@ class MainActivity : AppCompatActivity() {
                 binding.tabHome.background = activeBg
                 binding.ivHome.setColorFilter(activeColor)
             }
+
             1 -> {
                 binding.layoutSettingsContent.visibility = View.VISIBLE
                 binding.tabSettings.background = activeBg
@@ -460,9 +491,6 @@ class MainActivity : AppCompatActivity() {
             showToast("Unable to open link")
         }
     }
-
-
-
 
 
     private fun selectVideo() {
@@ -542,7 +570,7 @@ class MainActivity : AppCompatActivity() {
         dialog.window?.let { window ->
             // Make dialog window background transparent so our custom layout's background card and shape render perfectly
             window.setBackgroundDrawableResource(android.R.color.transparent)
-            
+
             // Set size parameters
             val lp = window.attributes
             lp.width = android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -560,19 +588,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         view.findViewById<View>(R.id.layoutStarGithub)?.setBounceClickListener {
-            openUrl("https://github.com/tharunbirla/LibreCuts")
+            openUrl("https://github.com/nixoslinuxb/VideoSequencer")
         }
 
         view.findViewById<View>(R.id.layoutSponsorGithub)?.setBounceClickListener {
-            openUrl("https://github.com/sponsors/tharunbirla")
-        }
-
-        view.findViewById<View>(R.id.layoutDiscord)?.setBounceClickListener {
-            openUrl("https://discord.gg/gwr3nE7YW")
+            openUrl("https://github.com/sponsors/nixoslinuxb")
         }
 
         view.findViewById<View>(R.id.layoutTroubleshooting)?.setBounceClickListener {
-            openUrl("https://github.com/tharunbirla/LibreCuts/wiki/Error-Codes-&-Troubleshooting")
+            openUrl("https://github.com/nixoslinuxb/VideoSequencer/issues")
         }
 
         view.findViewById<View>(R.id.btnOnboardingGetStarted)?.setBounceClickListener {
@@ -590,6 +614,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkForUpdates() {
         showToast("Checking for updates in browser...")
-        openUrl("https://github.com/tharunbirla/LibreCuts/releases/latest")
+        openUrl("https://github.com/nixoslinuxb/VideoSequencer/releases/latest")
     }
 }

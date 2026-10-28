@@ -2455,7 +2455,7 @@ class VideoEditingActivity : AppCompatActivity() {
     }
 
     private fun saveBitmapToGallery(bitmap: android.graphics.Bitmap) {
-        val filename = "LibreCuts_Frame_${System.currentTimeMillis()}.png"
+        val filename = "VideoEditing_Frame_${System.currentTimeMillis()}.png"
         var fos: java.io.OutputStream? = null
         var imageUri: Uri? = null
         try {
@@ -4931,7 +4931,7 @@ class VideoEditingActivity : AppCompatActivity() {
                     
                     val mimeType = if (isAudioOnly) "audio/mpeg" else "video/mp4"
                     val ext = if (isAudioOnly) ".mp3" else ".mp4"
-                    val prefix = if (isAudioOnly) "LibreCuts_Audio_" else "LibreCuts_"
+                    val prefix = if (isAudioOnly) "VideoEditing_Audio_" else "VideoEditing_"
 
                     if (customUriString != null) {
                         try {
@@ -4956,7 +4956,7 @@ class VideoEditingActivity : AppCompatActivity() {
                     } else {
                         // Default fallback
                         val defaultDir = if (isAudioOnly) Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC) else Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                        val outputDir = File(defaultDir, "LibreCuts")
+                        val outputDir = File(defaultDir, "VideoEditing")
                         if (!outputDir.exists()) outputDir.mkdirs()
                         val file = File(outputDir, "${prefix}${System.currentTimeMillis()}$ext")
                         outputFile = file
@@ -4997,7 +4997,7 @@ class VideoEditingActivity : AppCompatActivity() {
                         val displayPath = if (customFileUri != null) {
                             "Custom Folder"
                         } else {
-                            outputFile?.absolutePath ?: "Downloads/LibreCuts"
+                            outputFile?.absolutePath ?: "Downloads/VideoEditing"
                         }
                         Toast.makeText(
                             this@VideoEditingActivity,
@@ -5060,8 +5060,8 @@ class VideoEditingActivity : AppCompatActivity() {
             titleView.text = displayName
             pathView.text = customUri.path ?: customUriString
         } else {
-            titleView.text = "LibreCuts (Default)"
-            pathView.text = if (isAudioOnly) "Music/LibreCuts" else "Movies/LibreCuts"
+            titleView.text = "VideoEditing (Default)"
+            pathView.text = if (isAudioOnly) "Music/VideoEditing" else "Movies/VideoEditing"
         }
     }
 
@@ -7402,7 +7402,7 @@ class VideoEditingActivity : AppCompatActivity() {
         val isAudioOnly = videoFile.name.endsWith(".mp3")
         val mimeType = if (isAudioOnly) "audio/mpeg" else "video/mp4"
         val ext = if (isAudioOnly) ".mp3" else ".mp4"
-        val prefix = if (isAudioOnly) "LibreCuts_Audio_" else "LibreCuts_"
+        val prefix = if (isAudioOnly) "VideoEditing_Audio_" else "VideoEditing_"
         
         val sharedPreferences = getSharedPreferences("librecuts_prefs", Context.MODE_PRIVATE)
         val prefKey = if (isAudioOnly) "export_audio_directory_uri" else "export_directory_uri"
@@ -7431,15 +7431,15 @@ class VideoEditingActivity : AppCompatActivity() {
             }
         }
 
-        // Fallback or Default to Movies/LibreCuts
+        // Fallback or Default to Movies/VideoEditing
         return try {
             val contentValues = android.content.ContentValues().apply {
                 put(MediaStore.MediaColumns.DISPLAY_NAME, "${prefix}${System.currentTimeMillis()}$ext")
                 put(MediaStore.MediaColumns.MIME_TYPE, mimeType)
                 if (isAudioOnly) {
-                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_MUSIC + "/LibreCuts")
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_MUSIC + "/VideoEditing")
                 } else {
-                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_MOVIES + "/LibreCuts")
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_MOVIES + "/VideoEditing")
                 }
             }
             val collectionUri = if (isAudioOnly) MediaStore.Audio.Media.EXTERNAL_CONTENT_URI else MediaStore.Video.Media.EXTERNAL_CONTENT_URI

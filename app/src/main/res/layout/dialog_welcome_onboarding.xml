@@ -34,7 +34,7 @@
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:src="@mipmap/ic_launcher"
-                    android:contentDescription="LibreCuts App Icon" />
+                    android:contentDescription="App Icon" />
 
                 <TextView
                     android:id="@+id/tvOnboardingTitle"
@@ -163,49 +163,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Link: Discord -->
-            <LinearLayout
-                android:id="@+id/layoutDiscord"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/bg_aspect_ratio_item"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_discord_24"
-                    app:tint="@color/colorSecondary" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="12dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/str_discord_server"
-                        android:textColor="@color/textColor"
-                        android:textSize="14sp"
-                        android:fontFamily="sans-serif-medium" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/str_join_us_for_app_updates_and_co"
-                        android:textColor="@color/inactiveTool"
-                        android:textSize="11sp" />
-                </LinearLayout>
-            </LinearLayout>
 
             <!-- Troubleshooting section -->
             <LinearLayout
