@@ -1,0 +1,57 @@
+<resources>
+
+    <!-- PRIMARY: Liquid Pink / Neon Accents -->
+    <color name="colorPrimary">#FF2A6D</color>
+    <color name="colorPrimaryVariant">#D81B58</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+
+    <!-- SECONDARY: Liquid Cyan Glow -->
+    <color name="colorSecondary">#05D5E7</color>
+    <color name="colorSecondaryVariant">#039BB0</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+
+    <!-- BACKGROUND: Deep Dark Glass Canvas -->
+    <color name="background">#09090E</color>
+    <color name="colorOnBackground">#F2F4F8</color>
+
+    <!-- SURFACE: Translucent Acrylic Glass Layers -->
+    <color name="colorSurface">#14131D</color>
+    <color name="colorOnSurface">#F2F4F8</color>
+
+    <!-- UI SPECIFIC -->
+    <color name="statusBarColor">#00000000</color>
+    <color name="navigationBarColor">#00000000</color>
+    <color name="cinemaBlack">#050508</color>
+    <color name="textColor">#F2F4F8</color>
+
+    <!-- CONTAINERS (Glass Elevation levels) -->
+    <color name="surfaceContainerLowest">#09090E</color>
+    <color name="surfaceContainer">#161522</color>
+    <color name="surfaceContainerHigh">#1E1C2E</color>
+    <color name="surfaceVariant">#26243A</color>
+    <color name="floatingPanelBackground">#D9181626</color>
+
+    <color name="primaryContainer">#FF2A6D</color>
+    <color name="onPrimaryContainer">#FFFFFF</color>
+
+    <color name="tertiary">#05D5E7</color>
+    <color name="tertiaryContainer">#039BB0</color>
+    <color name="onTertiary">#FFFFFF</color>
+
+    <!-- GLASS OUTLINES & STROKES -->
+    <color name="outline">#2E2B45</color>
+    <color name="outlineVariant">#222033</color>
+    <color name="iconSecondary">#9A98AD</color>
+
+    <!-- TOOL COLORS -->
+    <color name="activeTool">#FF2A6D</color>
+    <color name="activeToolBackground">#33FF2A6D</color>
+    <color name="inactiveTool">#9A98AD</color>
+    <color name="inactiveToolBackground">#161522</color>
+
+    <color name="toolTextActive">#FF2A6D</color>
+    <color name="toolTextInactive">#9A98AD</color>
+
+    <color name="sliderHalo">#2E2B45</color>
+
+</resources>
